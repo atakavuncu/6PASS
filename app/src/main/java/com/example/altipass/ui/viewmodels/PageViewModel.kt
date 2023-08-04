@@ -1,4 +1,4 @@
-package com.example.altipass.ui.main
+package com.example.altipass.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
