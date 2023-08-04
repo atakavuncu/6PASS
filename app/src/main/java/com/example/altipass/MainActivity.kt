@@ -1,12 +1,10 @@
 package com.example.altipass
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.altipass.ui.main.SectionsPagerAdapter
+import com.example.altipass.ui.adapters.SectionsPagerAdapter
 import com.example.altipass.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
