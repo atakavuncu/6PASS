@@ -1,12 +1,19 @@
 package com.example.altipass
 
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
+import android.provider.ContactsContract.Data
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.altipass.ui.adapters.SectionsPagerAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.altipass.databinding.ActivityMainBinding
+import com.example.altipass.model.DataModel
+import com.example.altipass.retrofit.ApiService
+import com.example.altipass.retrofit.ServiceGenerator
+import com.example.altipass.ui.adapters.PostAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,10 +26,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
+        val recyclerView = binding.myRecyclerView
+
+        val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
+        val call = serviceGenerator.getPosts()
+
+        call.enqueue(object : Callback<DataModel> {
+            override fun onResponse(
+                call: Call<DataModel>,
+                response: Response<DataModel>
+            ) {
+                if (response.isSuccessful) {
+                    val dataModel: DataModel? = response.body()
+                    dataModel?.let { dataModel ->
+                        recyclerView.apply {
+                            layoutManager = LinearLayoutManager(this@MainActivity)
+                            adapter = PostAdapter(dataModel.sg)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<DataModel>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("FailureError", t.message.toString())
+            }
+        })
     }
 }
