@@ -1,14 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.MatchDetail">
+    tools:context=".ui.fragments.MatchDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="150dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/match_detail_background"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/star_non_selected"
+        android:tag="star_non_selected"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginStart="360sp"
+        android:layout_marginTop="70dp"/>
+
+    <TextView
+        android:id="@+id/timeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="16sp"
+        android:layout_marginTop="70dp"/>
+
+    <TextView
+        android:id="@+id/matchInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-black"
+        android:textSize="24sp"
+        android:layout_marginTop="120sp"/>
+
+    <TextView
+        android:id="@+id/dateInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="16sp"
+        android:layout_marginTop="180sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAÇ SONUCU"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="230sp"
+        android:layout_marginStart="20sp"/>
+
+    <LinearLayout
+        android:layout_width="90sp"
+        android:layout_height="75sp"
+        android:orientation="vertical"
+        android:layout_marginTop="270sp"
+        android:layout_marginStart="20sp"
+        android:background="@drawable/box_style">
+
+        <TextView
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:text="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"/>
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/firstTeamOdd"
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:text="1.80"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="90sp"
+        android:layout_height="75sp"
+        android:orientation="vertical"
+        android:layout_marginTop="270sp"
+        android:layout_marginStart="145sp"
+        android:background="@drawable/box_style">
+
+        <TextView
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"/>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/drawOdd"
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:text="3.30"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="90sp"
+        android:layout_height="75sp"
+        android:orientation="vertical"
+        android:layout_marginTop="270sp"
+        android:layout_marginStart="270sp"
+        android:background="@drawable/box_style">
+
+        <TextView
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:text="2"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"/>
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/secondTeamOdd"
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:text="2.75"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
 
 </FrameLayout>
