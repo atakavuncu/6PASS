@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.altipass.databinding.CardPostBinding
 import com.example.altipass.databinding.FragmentHomePageBinding
@@ -14,14 +15,16 @@ import com.example.altipass.model.DataModel
 import com.example.altipass.retrofit.ApiService
 import com.example.altipass.retrofit.ServiceGenerator
 import com.example.altipass.ui.adapters.PostAdapter
+import com.example.altipass.ui.viewmodels.HomePageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class HomePageFragment : Fragment() {
 
     private lateinit var binding: FragmentHomePageBinding
+    private val homePageViewModel: HomePageViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,30 +36,7 @@ class HomePageFragment : Fragment() {
         val view = binding.root
         val recyclerView = binding.matchesRecyclerView
 
-        val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
-        val call = serviceGenerator.getPosts()
-
-        call.enqueue(object : Callback<DataModel> {
-            override fun onResponse(
-                call: Call<DataModel>,
-                response: Response<DataModel>
-            ) {
-                if (response.isSuccessful) {
-                    val dataModel: DataModel? = response.body()
-                    dataModel?.let { dataModel ->
-                        recyclerView.apply {
-                            layoutManager = LinearLayoutManager(requireContext())
-                            adapter = PostAdapter(dataModel.sg)
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<DataModel>, t: Throwable) {
-                t.printStackTrace()
-                Log.e("FailureError", t.message.toString())
-            }
-        })
+        homePageViewModel.fetchData(recyclerView, requireContext())
 
         return view
     }

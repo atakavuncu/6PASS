@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">6PASS</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">6PASS</string>
     <string name="tab_text_1">Maçlar</string>
     <string name="tab_text_2">Favoriler</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mac_sonucu">MAÇ SONUCU</string>
+    <string name="mac_sonucu_ev_sahibi">1</string>
+    <string name="mac_sonucu_berabere">0</string>
+    <string name="mac_sonucu_deplasman">2</string>
 </resources>
