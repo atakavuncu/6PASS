@@ -1,19 +1,14 @@
 package com.example.altipass
 
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.altipass.databinding.ActivityMainBinding
-import com.example.altipass.model.DataModel
-import com.example.altipass.retrofit.ApiService
-import com.example.altipass.retrofit.ServiceGenerator
-import com.example.altipass.ui.adapters.PostAdapter
+import com.example.altipass.ui.fragments.FavouritesFragment
+import com.example.altipass.ui.fragments.MatchDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -26,31 +21,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val recyclerView = binding.myRecyclerView
+        val favourites = binding.favourites
 
-        val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
-        val call = serviceGenerator.getPosts()
+        favourites.setOnClickListener {
+            val favouritesFragment: Fragment = FavouritesFragment()
 
-        call.enqueue(object : Callback<DataModel> {
-            override fun onResponse(
-                call: Call<DataModel>,
-                response: Response<DataModel>
-            ) {
-                if (response.isSuccessful) {
-                    val dataModel: DataModel? = response.body()
-                    dataModel?.let { dataModel ->
-                        recyclerView.apply {
-                            layoutManager = LinearLayoutManager(this@MainActivity)
-                            adapter = PostAdapter(dataModel.sg)
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<DataModel>, t: Throwable) {
-                t.printStackTrace()
-                Log.e("FailureError", t.message.toString())
-            }
-        })
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentContainerView, favouritesFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
     }
 }
