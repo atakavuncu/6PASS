@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.altipass.R
 import com.example.altipass.model.MatchModel
-import com.example.altipass.ui.viewmodels.FavouriteViewHolder
 
 class FavouriteAdapter (val favourites: List<MatchModel>) : RecyclerView.Adapter<FavouriteViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {

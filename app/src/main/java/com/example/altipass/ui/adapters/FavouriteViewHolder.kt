@@ -1,4 +1,4 @@
-package com.example.altipass.ui.viewmodels
+package com.example.altipass.ui.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -14,19 +14,20 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.altipass.R
 import com.example.altipass.model.EventModel
+import com.example.altipass.model.MatchModel
 import com.example.altipass.ui.fragments.MatchDetailFragment
 
-class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class FavouriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
     private val matchName: TextView = itemView.findViewById(R.id.matchName)
     private val date: TextView = itemView.findViewById(R.id.date)
     private val time: TextView = itemView.findViewById(R.id.time)
     private val button: Button = itemView.findViewById(R.id.button)
 
     @SuppressLint("SetTextI18n")
-    fun bindView(eventModel: EventModel, position: Int) {
-        matchName.text = "${eventModel.EA[position].HN} v ${eventModel.EA[position].AN}"
-        date.text = eventModel.EA[position].D
-        time.text = eventModel.EA[position].T
+    fun bindView(favourites: List<MatchModel>, position: Int) {
+        matchName.text = "${favourites[position].HN} v ${favourites[position].AN}"
+        date.text = favourites[position].D
+        time.text = favourites[position].T
         if (position % 2 == 0)
             button.background = ColorDrawable(Color.argb(0, 255, 255, 255))
         else
@@ -36,7 +37,7 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val matchDetailFragment: Fragment = MatchDetailFragment()
 
             val bundle = Bundle()
-            bundle.putParcelable("key", eventModel.EA[position])
+            bundle.putParcelable("key", favourites[position])
             matchDetailFragment.arguments = bundle
 
             val fragmentManager: FragmentManager = (itemView.context as AppCompatActivity).supportFragmentManager
@@ -46,5 +47,4 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             fragmentTransaction.commit()
         }
     }
-
 }
