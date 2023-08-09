@@ -7,6 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.example.altipass.R
 import com.example.altipass.databinding.FragmentMatchDetailBinding
@@ -40,6 +46,7 @@ class MatchDetailFragment : Fragment() {
         val secondTeamOdd = binding.secondTeamOdd
 
         val star = binding.star
+        val backIcon = binding.backIcon
 
         val matchList = favouritesViewModel.getFavoriteMatches(sharedPreferences)
 
@@ -80,6 +87,16 @@ class MatchDetailFragment : Fragment() {
                     matchDetailViewModel.addMatchToFavorites(matchModel, sharedPreferences)
                 }
             }
+        }
+
+        backIcon.setOnClickListener {
+            val homePageFragment: Fragment = HomePageFragment()
+
+            val fragmentManager: FragmentManager = (this.context as AppCompatActivity).supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentContainerView, homePageFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         return view
